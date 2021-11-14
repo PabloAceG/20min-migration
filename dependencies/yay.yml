@@ -1,5 +1,5 @@
 ---
-- name: Instal yay
+- name: Install yay
   hosts: localhost
   connection: local
   become: yes
