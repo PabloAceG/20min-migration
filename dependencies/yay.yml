@@ -1,0 +1,66 @@
+---
+- name: Instal yay
+  hosts: localhost
+  connection: local
+  become: yes
+
+  vars:
+    tempfolder: /tempyay/
+    ansible_module_folder: /usr/share/ansible/plugins/modules/
+
+  tasks:
+    - name: Create temp folder to save download material
+      file:
+        path: "{{ tempfolder }}"
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+
+    - name: Install base-devel group to have makepkg
+      pacman:
+        name: base-devel
+        state: present
+
+    - name: Install Git
+      pacman:
+        name: git
+        state: present
+
+    - name: Clone yay
+      git:
+        repo: https://aur.archlinux.org/yay.git
+        dest: "{{ tempfolder }}"
+        clone: yes
+        update: yes
+
+    - name: Change yay owner
+      file:
+        path: "{{ tempfolder }}/yay/"
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+
+    - name: Build yay using makepkg -si
+      command: >-
+        makepkg -si --noconfirm
+      args:
+        chdir: "{{ tempfolder }}"
+      become: no
+
+    - name: Make sure ansible module folder exists
+      file:
+        path: "{{ ansible_module_folder }}"
+        state: directory
+
+    - name: Install yay Ansible module
+      git:
+        repo: https://github.com/mnussbaum/ansible-yay.git
+        dest: "{{ ansible_module_folder }}/yay"
+        clone: yes
+        update: yes
+        force: yes
+
+    - name: Delete temporary folder
+      file:
+        path: "{{ tempfolder }}"
+        state: absent
