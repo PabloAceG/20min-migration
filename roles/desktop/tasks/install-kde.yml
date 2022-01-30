@@ -1,0 +1,60 @@
+---
+- name: Install dependencies from different providers
+  pacman: 
+    name: "{{ item }}"
+    state: present
+  loop:
+    - wireplumber
+    - gnu-free-fonts
+    - phonon-qt5-gstreamer
+
+- name: Install visual environment
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - wayland
+    - kwin
+    - xorg-xwayland
+    - plasma-desktop
+    - plasma-wayland-session
+
+- name: Install "egl-wayland" for NVIDIA user
+  pacman:
+    name: egl-wayland
+    state: present
+  tags: nvidia
+
+- name: Install QT5 and GLFW packages for Wayland API compatibility
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - qt5-wayland
+    - glfw-wayland
+ 
+- name: Install "xlsclients" to detect windows running through XWayland
+  pacman:
+    name: xorg-xlsclients
+    state: present
+
+- name: Install "waybar" as status bar
+  pacman:
+    name: waybar
+    state: present
+
+- name: Install "wofi" application launcher
+  pacman:
+    name: wofi
+    state: present
+
+
+- name: See if Wayland is running
+  shell: "loginctl show-session  $(loginctl | grep {{ ansible_env.SUDO_USER }} | awk '{print $1}' ) -p Type"
+  register: window_manager
+  changed_when: false
+
+- name: Start Plasma Wayland session
+  command: >-
+    "/bin/bash XDG_SESSION_TYPE=wayland startplasma-wayland"
+  when: window_manager.stdout.find("Wayland") != -1

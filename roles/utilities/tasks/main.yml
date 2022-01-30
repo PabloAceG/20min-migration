@@ -1,0 +1,13 @@
+---
+- name: Install zip
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - zip
+    - unzip
+
+- name: Install password manager
+  pacman:
+    name: keepassxc
+    state: present

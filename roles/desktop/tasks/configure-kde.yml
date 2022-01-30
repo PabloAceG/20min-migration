@@ -1,0 +1,31 @@
+---
+- name: Install power managing service
+  pacman:
+    name: powerdevil
+    state: present
+
+- name: Install integration with power profiles
+  pacman:
+    name: power-profiles-daemon
+    state: present
+
+- name: Install sound applet
+  pacman:
+    name: plasma-pa
+    state: present
+
+- name: Install "Dolphin" File Manager
+  pacman:
+    name: dolphin
+    state: present
+
+- name: Install screen sharing WebRTC frontend
+  pacman:
+    name: xdg-desktop-portal
+    state: present
+
+- name: Install screen sharging WebRTC backend for KDE
+  pacman:
+    name: xdg-desktop-portal-kde
+    state: present
+  tags: kde

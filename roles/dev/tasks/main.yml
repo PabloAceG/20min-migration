@@ -1,0 +1,6 @@
+- name: Install git version control tool
+  pacman:
+    name: git
+    state: present
+
+- include_tasks: arduino.yml

@@ -1,0 +1,34 @@
+---
+- hosts: localhost
+  become: true
+
+  pre_tasks:
+    - name: Run the equivalent of "pacman -Syu"
+      pacman:
+        update_cache: yes
+        upgrade: yes
+
+  roles:
+    - role: network
+      tags: network
+
+    - role: terminal
+      tags: terminal
+
+    - role: text_editor
+      tags: text_editor
+
+    - role: dev
+      tags: dev
+
+    - role: browser
+      tags: browser
+
+    - role: utilities
+      tags: utilities
+
+    - role: communication
+      tags: communication
+
+    - role: desktop
+      tags: desktop

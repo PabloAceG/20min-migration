@@ -1,0 +1,10 @@
+---
+- name: Install "Vim"
+  pacman: 
+    name: vim
+    state: present
+
+- name: Copy Vim configuration
+  copy:
+    src: .vimrc
+    dest: "/home/{{ ansible_env.SUDO_USER }}"

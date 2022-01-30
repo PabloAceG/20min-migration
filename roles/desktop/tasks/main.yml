@@ -1,0 +1,16 @@
+---
+- name: Install KDE Plasme over Wayland
+  include_tasks: install-kde.yml
+
+- name: Configure KDE
+  include_tasks: configure-kde.yml
+
+- name: Install "NetworkManager" KDE Plasma applet
+  pacman:
+    name: plasma-nm
+    state: present
+# TODO: Include it to task bar
+
+# TODO: configure wonfi
+# TODO: configure waybar
+# TODO: configure theme

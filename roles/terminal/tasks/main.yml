@@ -1,0 +1,5 @@
+---
+- name: Install terminal "Alacritty"
+  pacman:
+    name: alacritty
+    state: present

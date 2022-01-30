@@ -1,0 +1,23 @@
+---
+- name: Install Arduino IDE
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - arduino
+    - arduino-cli
+    - arduino-docs
+    - arduino-avr-core
+
+- name: Add user to uucp group
+  user:
+    name: "{{ ansible_env.SUDO_USER }}"
+    groups: uucp
+    append: yes
+
+- name: Install "udev" to access serial port
+  systemd:
+    name: systemd-udevd
+    state: started
+    enabled: yes  
+

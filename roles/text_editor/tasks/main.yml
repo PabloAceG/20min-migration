@@ -1,0 +1,9 @@
+---
+- include_tasks: vim.yml
+  tags: vim
+
+- include_tasks: emacs.yml
+  tags: emacs
+
+- include_tasks: vscode.yml
+  tags: vscode

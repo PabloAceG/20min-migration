@@ -1,0 +1,8 @@
+---
+- name: Install Visual Studio Code (release from official code-oss repository)
+  pacman:
+    name: code
+    state: present 
+
+# TODO: run natively in wayland
+# https://wiki.archlinux.org/title/Visual_Studio_Code#Running_natively_under_Wayland

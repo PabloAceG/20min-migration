@@ -1,0 +1,5 @@
+---
+- name: Install Firefox browser
+  pacman:
+    name: firefox
+    state: present
