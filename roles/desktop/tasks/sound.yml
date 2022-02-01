@@ -1,0 +1,16 @@
+---
+- name: Install sound applet
+  pacman:
+    name: plasma-pa
+    state: present
+
+- name: Install "pipewire-pulse" to avoid incompatibility between "pipewire" and "pulseaudio"
+  pacman:
+    name: pipewire-pulse
+    state: present
+
+- name: Uninstall  "pulseaudio" (dependency for "plasma-pa" and substituted by "pipewire-pulse")
+  pacman:
+    name: pulseaudio
+    state: absent
+    force: yes

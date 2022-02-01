@@ -1,0 +1,11 @@
+---
+- name: Install screen sharing WebRTC frontend
+  pacman:
+    name: xdg-desktop-portal
+    state: present
+
+- name: Install screen sharging WebRTC backend for KDE
+  pacman:
+    name: xdg-desktop-portal-kde
+    state: present
+  tags: kde

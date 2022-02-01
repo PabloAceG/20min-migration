@@ -1,0 +1,21 @@
+---
+- name: Install "bluez" to provide Bluetooth protocol stack
+  pacman:
+    name: bluez
+    state: present
+
+- name: Check if Bluetooth generic drive is loaded
+  modprobe:
+    name: btusb
+    state: present
+
+- name: Enable "bluetooth.service"
+  systemd:
+    name: bluetooth
+    state: started
+    enabled: yes
+
+- name: Install KDE front-end bluetooth manager
+  pacman:
+    name: bluedevil
+    state: present

@@ -9,23 +9,13 @@
     name: power-profiles-daemon
     state: present
 
-- name: Install sound applet
-  pacman:
-    name: plasma-pa
-    state: present
+- include_tasks: sound.yml
 
 - name: Install "Dolphin" File Manager
   pacman:
     name: dolphin
     state: present
 
-- name: Install screen sharing WebRTC frontend
-  pacman:
-    name: xdg-desktop-portal
-    state: present
+- include_tasks: screen-sharing.yml
 
-- name: Install screen sharging WebRTC backend for KDE
-  pacman:
-    name: xdg-desktop-portal-kde
-    state: present
-  tags: kde
+- include_tasks: bluetooth.yml

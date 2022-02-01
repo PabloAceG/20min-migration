@@ -3,3 +3,5 @@
   pacman:
     name: alacritty
     state: present
+
+- include_tasks: zsh.yml

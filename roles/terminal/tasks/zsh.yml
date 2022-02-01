@@ -1,0 +1,35 @@
+---
+- name: Install "Zsh"
+  pacman:
+    name: zsh
+    state: present
+
+- name: Check if OhMyZsh is installed for user "{{ ansible_env.SUDO_USER }}"
+  stat:
+    path: "/home/{{ ansible_env.SUDO_USER }}/.oh-my-zsh"
+  register: ohmyzsh
+
+- name: Create temporary folder
+  file:
+    name: temp
+    state: directory
+  when: not ohmyzsh.stat.exists
+
+- name: Download "Oh My Zsh" to customize "Zsh"
+  get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: temp/
+    mode: '744'
+  when: not ohmyzsh.stat.exists
+
+- name: Installation for "Oh My Zsh"
+  script: temp/install.sh
+
+- name: Recursively remove temporary directory
+  file:
+    path: temp
+    state: absent
+
+# TODO: Install Meslo Nerd Fonts. Belong to AUR or manual... so will have to
+# wait
+

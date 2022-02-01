@@ -4,3 +4,5 @@
     state: present
 
 - include_tasks: arduino.yml
+
+- include_tasks: docker.yml

@@ -1,51 +1,7 @@
 ---
-- name: Uninstall "dhcpcd" for incompatibility issues with "NetworkManager"
-  pacman:
-    name: dhcpcd
-    state: absent
+- include_tasks: wifi.yml
 
-- name: Disable "dhcpcd" job in case enabled
-  systemd:
-    name: dhcpcd
-    state: stopped
-    enabled: no
-  register: dhcpcd_service
-  failed_when: dhcpcd_service is failed and 'Could not find the requested service' not in dhcpcd_service.msg
-
-- name: Install network management tools
-  pacman:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - networkmanager
-    - wireless_tools
-    - wpa_supplicant
-
-- name: Enable "NetworkManager" service
-  systemd:
-    name: NetworkManager
-    state: started
-    enabled: yes
-
-- name: Enable support for wireless connections with "wpa_supplicant"
-  systemd:
-    name: wpa_supplicant
-    state: started
-    enabled: yes
-
-- name: Create a WiFi connection
-  community.general.nmcli:
-    type: wifi
-    conn_name: "{{ item.ssid }}"
-    ifname: "{{ ansible_default_ipv4.interface }}"
-    ssid: "{{ item.ssid }}"
-    wifi_sec:
-      key-mgmt: wpa-psk
-      psk: "{{ item.pass }}"
-    autoconnect: true
-    state: present
-  with_items: "{{ wifi }}"
-  when: wifi is defined
+- include_tasks: pacman.yml
 
 - include_tasks: vpn.yml
   tags: vpn
