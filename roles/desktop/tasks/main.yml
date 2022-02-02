@@ -9,8 +9,3 @@
   pacman:
     name: plasma-nm
     state: present
-# TODO: Include it to task bar
-
-# TODO: configure wonfi
-# TODO: configure waybar
-# TODO: configure theme

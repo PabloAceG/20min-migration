@@ -5,4 +5,8 @@
 
 - include_tasks: arduino.yml
 
+- include_tasks: aws.yml
+
 - include_tasks: docker.yml
+
+- include_tasks: terraform.yml

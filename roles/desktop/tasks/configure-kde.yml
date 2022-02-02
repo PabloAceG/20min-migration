@@ -16,6 +16,6 @@
     name: dolphin
     state: present
 
-- include_tasks: screen-sharing.yml
+- include_tasks: screen-sharing-kde.yml
 
 - include_tasks: bluetooth.yml

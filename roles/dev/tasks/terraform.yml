@@ -1,0 +1,5 @@
+---
+- name: Install Terraform
+  pacman:
+    name: terraform
+    state: present

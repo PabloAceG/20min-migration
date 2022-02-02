@@ -11,3 +11,8 @@
   pacman:
     name: keepassxc
     state: present
+
+- name: Install gimp photo editor
+  pacman:
+    name: gimp
+    state: present
