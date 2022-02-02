@@ -7,28 +7,34 @@
   loop:
     - ParallelDownloads = 5
     - Color
+  become: yes
 
 - name: Back-up mirrorlist before overwriting it
   copy:
     src: /etc/pacman.d/mirrorlist
     dest: /etc/pacman.d/mirrorlist.backup
+  become: yes
 
 - name: Install "reflector" to sort mirrorlist
   pacman:
     name: reflector
     state: present
+  become: yes
 
 - name: Reload daemons just in case
   systemd:
     daemon_reload: yes
+  become: yes
 
 - name: Copy "reflector" custom configuration
   copy:
     src: reflector.conf
     dest: /etc/xdg/reflector/reflector.conf
+  become: yes
 
 - name: Enable "reflector" weekly timer
   systemd:
     name: reflector.timer
     state: started
     enabled: yes
+  become: yes

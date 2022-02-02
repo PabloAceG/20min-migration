@@ -3,9 +3,11 @@
   pacman:
     name: xdg-desktop-portal
     state: present
+  become: yes
 
 - name: Install screen sharging WebRTC backend for KDE
   pacman:
     name: xdg-desktop-portal-kde
     state: present
   tags: kde
+  become: yes

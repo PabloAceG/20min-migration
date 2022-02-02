@@ -3,6 +3,7 @@
   pacman:
     name: code
     state: present 
+  become: yes
 
 # TODO: run natively in wayland
 # https://wiki.archlinux.org/title/Visual_Studio_Code#Running_natively_under_Wayland

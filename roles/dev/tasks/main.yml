@@ -2,6 +2,7 @@
   pacman:
     name: git
     state: present
+  become: yes
 
 - include_tasks: arduino.yml
 

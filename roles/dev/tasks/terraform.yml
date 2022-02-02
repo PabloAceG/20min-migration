@@ -3,3 +3,4 @@
   pacman:
     name: terraform
     state: present
+  become: yes

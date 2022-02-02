@@ -3,11 +3,13 @@
   pacman:
     name: powerdevil
     state: present
+  become: yes
 
 - name: Install integration with power profiles
   pacman:
     name: power-profiles-daemon
     state: present
+  become: yes
 
 - include_tasks: sound.yml
 
@@ -15,6 +17,7 @@
   pacman:
     name: dolphin
     state: present
+  become: yes
 
 - include_tasks: screen-sharing-kde.yml
 

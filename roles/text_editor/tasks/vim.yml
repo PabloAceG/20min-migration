@@ -3,8 +3,17 @@
   pacman: 
     name: vim
     state: present
+  become: yes
 
 - name: Copy Vim configuration
   copy:
     src: .vimrc
-    dest: "/home/{{ ansible_env.SUDO_USER }}"
+    dest: "{{ ansible_env.HOME }}"
+
+- name: Change .vimrc file owner to current user
+  file:
+    dest: "{{ ansible_env.HOME }}/.vimrc"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: 0744
+  become: yes

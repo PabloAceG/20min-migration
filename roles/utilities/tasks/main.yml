@@ -6,13 +6,16 @@
   loop:
     - zip
     - unzip
+  become: yes
 
 - name: Install password manager
   pacman:
     name: keepassxc
     state: present
+  become: yes
 
 - name: Install gimp photo editor
   pacman:
     name: gimp
     state: present
+  become: yes

@@ -1,3 +1,52 @@
 ---
-- debug:
-    msg: "In the making"
+- name: Install emacs
+  pacman:
+    name: emacs
+    state: present
+  become: yes
+
+- name: Prepare prerequisite for Doom Emacs
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - fd
+    - ripgrep
+  become: yes
+
+- name: Check if Doom Emacs is installed
+  stat:
+    path: "{{ ansible_env.HOME }}/.doom.d"
+  register: doom
+
+- name: Clone Doom Emacs repository
+  git:
+    repo: https://github.com/hlissner/doom-emacs
+    dest: "{{ ansible_env.HOME }}/.emacs.d"
+    depth: 1
+    clone: yes
+    update: yes
+    force: yes
+  become: yes
+  when: not doom.stat.exists
+
+- name: Change .emacs.d folder owner to current user
+  file:
+    dest: "{{ ansible_env.HOME }}/.emacs.d"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: 0744
+    recurse: yes
+  become: yes
+  when: not doom.stat.exists
+
+- name: Install Doom Emacs
+  shell:
+    cmd: "{{ ansible_env.HOME }}/.emacs.d/bin/doom install"
+    stdin:
+      - y
+      - 3
+      - y
+  when: not doom.stat.exists
+
+# TODO: Copy conf files

@@ -3,6 +3,7 @@
   pacman:
     name: dhcpcd
     state: absent
+  become: yes
 
 - name: Disable "dhcpcd" job in case enabled
   systemd:
@@ -10,6 +11,7 @@
     state: stopped
     enabled: no
   register: dhcpcd_service
+  become: yes
   failed_when: dhcpcd_service is failed and 'Could not find the requested service' not in dhcpcd_service.msg
 
 - name: Install network management tools
@@ -20,22 +22,26 @@
     - networkmanager
     - wireless_tools
     - wpa_supplicant
+  become: yes
 
 - name: Reload daemons just in case
   systemd:
     daemon_reload: yes
+  become: yes
 
 - name: Enable "NetworkManager" service
   systemd:
     name: NetworkManager
     state: started
     enabled: yes
+  become: yes
 
 - name: Enable support for wireless connections with "wpa_supplicant"
   systemd:
     name: wpa_supplicant
     state: started
     enabled: yes
+  become: yes
 
 - name: Create a WiFi connection
   community.general.nmcli:
@@ -50,3 +56,4 @@
     state: present
   with_items: "{{ wifi }}"
   when: wifi is defined
+  become: yes

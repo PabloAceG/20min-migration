@@ -8,16 +8,18 @@
     - arduino-cli
     - arduino-docs
     - arduino-avr-core
+  become: yes
 
 - name: Add user to uucp group
   user:
-    name: "{{ ansible_env.SUDO_USER }}"
+    name: "{{ ansible_env.USER }}"
     groups: uucp
     append: yes
+  become: yes
 
 - name: Install "udev" to access serial port
   systemd:
     name: systemd-udevd
     state: started
     enabled: yes  
-
+  become: yes

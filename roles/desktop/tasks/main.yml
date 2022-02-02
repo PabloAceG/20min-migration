@@ -9,3 +9,4 @@
   pacman:
     name: plasma-nm
     state: present
+  become: yes

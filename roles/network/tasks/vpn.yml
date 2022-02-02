@@ -1,5 +1,8 @@
 ---
+# TODO: Install OpenVPN
+
 - name: Install "OpenVPN" plugin for "NetworkManager"
   pacman:
     name: networkmanager-openvpn
     state: present
+  become: yes

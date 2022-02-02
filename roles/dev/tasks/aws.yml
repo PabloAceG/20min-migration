@@ -3,3 +3,4 @@
   pacman:
     name: aws-cli
     state: present
+  become: yes

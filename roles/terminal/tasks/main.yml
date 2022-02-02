@@ -3,5 +3,12 @@
   pacman:
     name: alacritty
     state: present
+  become: yes
+
+- name: Install "htop" system monitoring
+  pacman:
+    name: htop
+    state: present
+  become: yes
 
 - include_tasks: zsh.yml

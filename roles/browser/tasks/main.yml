@@ -3,3 +3,4 @@
   pacman:
     name: firefox
     state: present
+  become: yes
