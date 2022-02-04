@@ -5,6 +5,12 @@
     state: present
   become: yes
 
+- name: Change user default shell to "Zsh"
+  user:
+    name: "{{ ansible_env.USER }}"
+    shell: /bin/zsh
+  become: yes
+
 - name: Check if OhMyZsh is installed
   stat:
     path: "{{ ansible_env.HOME }}/.oh-my-zsh"
@@ -33,6 +39,22 @@
     state: absent
   when: not ohmyzsh.stat.exists
 
-# TODO: Install Meslo Nerd Fonts. Belong to AUR or manual... so will have to
-# wait
+- name: Copy ".zshrc" configuration for Zsh, accounting for "OhMyZsh" plugins
+  copy:
+    src: .zshrc
+    dest: "{{ ansible_env.HOME }}"
 
+# TODO: install Meslo Nerd Fonts from AUR
+
+- name: Ensure ES locale exists in order to use powerlevel10k styles
+  locale_gen:
+    name: es_ES.UTF-8
+    state: present
+  become: yes
+
+# TODO: install powerlevel10k from AUR
+
+- name: Copy "powerlevel10k" configuration for Zsh aspect
+  copy:
+    src: .p10k.zsh
+    dest: "{{ ansible_env.HOME }}"

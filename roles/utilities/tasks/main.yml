@@ -14,8 +14,14 @@
     state: present
   become: yes
 
-- name: Install gimp photo editor
+- name: Install "Gimp" photo editor
   pacman:
     name: gimp
+    state: present
+  become: yes
+
+- name: Install "Okular" PDF reader
+  pacman:
+    name: okular
     state: present
   become: yes
