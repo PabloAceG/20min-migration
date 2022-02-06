@@ -78,24 +78,25 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  ansible               # Adds several aliases
-  archlinux             # Adds some aliases and functions to work with Arch
-  #aws                   # Provide completio for awscli and few utilities to manage AWS profiles and dipplay them in the promt
-  branch                # Displays current Git or Mercurial branch
-  #chucknorris           # Chuck Norris fortunes
-  colored-man-pages     # Adds color to mang pages
-  command-not-found     # Provide suggested packages to install if command not found
-  common-aliases        # Helpful shortcuts aliases for many commonly used commands
-  docker-compose        # Provide completion for docker-compose as well as some aliases
-  docker                # Auto-completion for docker
-  fd                    # Adds completion for file search tool fd
-  git                   # Provides many aliases and a few useful funtions
-  gitignore             # Enables use of gitignore.io templates
-  history               # Provides aliases for using history command
-  #jira                  # CLI support for JIRA interaction
-  #kubectl               # Adds completions for K8s cluster manager as well as aliases
-  systemd               # Provides many useful aliases for systemd
-  #terraform             # Adds completion for terraform as well as aliases and a promt function
+  ansible                       # Adds several aliases
+  archlinux                     # Adds some aliases and functions to work with Arch
+  #aws                           # Provide completio for awscli and few utilities to manage AWS profiles and dipplay them in the promt
+  branch                        # Displays current Git or Mercurial branch
+  colored-man-pages             # Adds color to mang pages
+  command-not-found             # Provide suggested packages to install if command not found
+  docker-compose                # Provide completion for docker-compose as well as some aliases
+  docker                        # Auto-completion for docker
+  fd                            # Adds completion for file search tool fd
+  git                           # Provides many aliases and a few useful funtions
+  gitignore                     # Enables use of gitignore.io templates
+  history                       # Provides aliases for using history command
+  #jira                          # CLI support for JIRA interaction
+  #kubectl                       # Adds completions for K8s cluster manager as well as aliases
+  sudo                          # Easily prefix current/previous command with sudo using `esc` twice
+  systemd                       # Provides many useful aliases for systemd
+  #terraform                     # Adds completion for terraform as well as aliases and a promt function
+  zsh-autosuggestions           # Suggests commands as you type based on history and completions
+  zsh-syntax-highlighting       # Provides sytanx highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -147,3 +148,10 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Custom aliases for lsd, next gen ls
+alias l='lsd -lFh'      # List files as a long list, show suze, type, human readable
+alias la='lsd -a'       # List all files
+alias lla='lsd -la'     # List all files as a long list
+alias lt='lsd --tree'   # List files as a tree structure
+alias lr='lsd -tRFh'    # List files recursively sorted by date, show type, human-readable

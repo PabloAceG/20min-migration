@@ -11,4 +11,12 @@
     state: present
   become: yes
 
+- name: Install "neofetch" information tool
+  pacman:
+    name: neofetch
+    state: present
+  become: yes
+
 - include_tasks: zsh.yml
+
+- include_tasks: lsd.yml
