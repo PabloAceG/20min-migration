@@ -1,0 +1,6 @@
+---
+- name: Install "cmake"
+  pacman: 
+    name: cmake
+    state: present
+  become: yes

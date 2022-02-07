@@ -8,6 +8,8 @@
 
 - include_tasks: aws.yml
 
+- include_tasks: c.yml
+
 - include_tasks: docker.yml
 
 - include_tasks: terraform.yml

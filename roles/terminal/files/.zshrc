@@ -1,3 +1,10 @@
+# Variables
+# Needed for flameshot to work
+export LC_ALL=C
+export LANG=C
+# Used for aliases below
+export EDITOR=/usr/bin/vim
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -155,3 +162,6 @@ alias la='lsd -a'       # List all files
 alias lla='lsd -la'     # List all files as a long list
 alias lt='lsd --tree'   # List files as a tree structure
 alias lr='lsd -tRFh'    # List files recursively sorted by date, show type, human-readable
+# Open config files
+alias vimrc='${EDITOR} ~/.vimrc'
+alias zshrc='${EDITOR} ~/.zshrc'

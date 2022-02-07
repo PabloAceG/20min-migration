@@ -14,6 +14,18 @@
     state: present
   become: yes
 
+- name: Install "flameshot" to take screenshots
+  pacman:
+    name: flameshot
+    state: present
+  become: yes
+
+- name: Install "Gwenview" image viewer
+  pacman:
+    name: gwenview
+    state: present
+  become: yes
+
 - name: Install "Gimp" photo editor
   pacman:
     name: gimp
