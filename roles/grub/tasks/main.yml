@@ -1,0 +1,31 @@
+---
+- name: Check if theme has already been installed
+  stat:
+    path: /usr/share/grub/themes/Xenlism-Arch
+  register: grub_theme
+
+- name: Create temp folder to download Grub theme
+  file:
+    name: temp
+    state: directory
+  when: not grub_theme.stat.exists 
+
+- name: Download Grub Xenlism Arch Grub Theme
+  git:
+    repo: https://github.com/xenlism/Grub-themes.git
+    dest: temp
+  when: not grub_theme.stat.exists 
+
+- name: Install Xenlism Arch Grub theme
+  shell: |
+    ./install.sh
+  args:
+    chdir: "temp/xenlism-grub-arch-{{resolution}}"
+  become: yes
+  when: not grub_theme.stat.exists 
+
+- name: Remove temp folder used to download Grub theme
+  file:
+    name: temp
+    state: absent
+  when: not grub_theme.stat.exists 

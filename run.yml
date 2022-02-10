@@ -32,3 +32,6 @@
 
     - role: desktop
       tags: desktop
+
+    - role: grub
+      tags: grub
