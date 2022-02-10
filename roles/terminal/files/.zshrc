@@ -133,6 +133,19 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Custom aliases for lsd, next gen ls
+alias l='lsd -lFh'      # List files as a long list, show suze, type, human readable
+alias la='lsd -a'       # List all files
+alias lla='lsd -la'     # List all files as a long list
+alias lt='lsd --tree'   # List files as a tree structure
+alias lr='lsd -tRFh'    # List files recursively sorted by date, show type, human-readable
+# Open config files
+alias vimrc='${EDITOR} ~/.vimrc'
+alias zshrc='${EDITOR} ~/.zshrc'
+alias alacrittycfg='${EDITOR} ~/.config/alacritty/alacritty.yml'
+
+# ##############################################################################
 # The following lines were added by compinstall
 
 zstyle ':completion:*' completer _complete _ignored _correct _approximate
@@ -155,13 +168,3 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# Custom aliases for lsd, next gen ls
-alias l='lsd -lFh'      # List files as a long list, show suze, type, human readable
-alias la='lsd -a'       # List all files
-alias lla='lsd -la'     # List all files as a long list
-alias lt='lsd --tree'   # List files as a tree structure
-alias lr='lsd -tRFh'    # List files recursively sorted by date, show type, human-readable
-# Open config files
-alias vimrc='${EDITOR} ~/.vimrc'
-alias zshrc='${EDITOR} ~/.zshrc'
