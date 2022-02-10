@@ -20,6 +20,18 @@ set modelines=0
 " Show line number
 set number
 
+" Highlight cursor line underneath curso (horizontally)
+set cursorline
+" Remove the underline from enabling cursorline
+:highlight clear CursorLine 
+:highlight clear CursorLineNR
+" Color customization:
+" https://vim.fandom.com/wiki/Xterm256_color_names_for_console_Vim
+" Set cursor line to have lighter background
+:highlight CursorLine ctermbg=233
+" Set line numbering to lighter background
+:highlight CursorLineNR ctermbg=236
+
 " Show file stats
 set ruler
 
@@ -31,12 +43,13 @@ set encoding=utf-8
 
 " Completion
 set wildmenu
+set wildmode=longest,list:lastused " Complee longest common string, then list alternatives sorted by last used
 
 " Whitespace
 set wrap
 set textwidth=80
 set colorcolumn=80
-set formatoptions=tcron1j
+set formatoptions=tcon1j
 set shiftwidth=4
 set softtabstop=4
 set expandtab
@@ -44,7 +57,11 @@ set autoindent " When new line or no file-specific indenting, keep same indent a
 
 " Cursor motion
 set mouse=a " Enable mouse for all modes
-set scrolloff=3
+if $TERM == 'alacritty' " Avoid Vim bug not detecting mouse terminal events
+    set ttymouse=sgr
+endif
+
+set scrolloff=5
 set backspace=indent,eol,start
 set matchpairs+=<:> " use % to jump between pairs
 runtime! macros/matchit.vim
@@ -123,7 +140,7 @@ Plug 'mg979/vim-visual-multi'
 " NOTE: After installation need to trigger compilation manually:
 "       cd ~/.vim/bundle/YouCompleteMe
 "       python3 install.py --****-completer
-Plug 'ycm-core/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
 
 call plug#end()
 

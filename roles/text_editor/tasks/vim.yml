@@ -34,10 +34,11 @@
       - "You need to manually install Vim plugins via vim-plug"
       - "To do so, run ':PlugInstall' in Vim"
 
-- name:
-  debug:
-    msg: 
-      - "In order to use Vim 'YouCompleteMe' you also need to compile it:"
-      - "cd ~.vim/plugged/YouCompleteme"
-      - "python3 install.py --<language>-completer --<language2>-completer"
-      - "You may want to run this command after this playbook has finished with the 'dev' role"
+- name: Copy filetype plugins configurations for "Vim"
+  copy:
+    src: ftplugin
+    dest: "{{ ansible_env.HOME }}/.vim"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: 0744
+  become: yes
