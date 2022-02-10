@@ -1,0 +1,18 @@
+---
+- name: Install "Python", altough it should be installed already with "Ansible"
+  pacman:
+    name: python
+    state: present
+  become: yes
+
+- name: Install "pip"
+  pacman:
+    name: python-pip
+    state: present
+  become: yes
+
+- name: Install "jedi" for "Python" completion
+  pip:
+    name: python-jedi
+    state: present
+  become: yes

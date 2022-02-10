@@ -12,4 +12,6 @@
 
 - include_tasks: docker.yml
 
+- include_tasks: python.yml
+
 - include_tasks: terraform.yml
