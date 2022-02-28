@@ -5,6 +5,8 @@ export LANG=C
 # Used for aliases below
 export EDITOR=/usr/bin/vim
 
+export PATH=$PATH:$HOME/.emacs.d/bin
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -101,7 +103,7 @@ plugins=(
   #kubectl                       # Adds completions for K8s cluster manager as well as aliases
   sudo                          # Easily prefix current/previous command with sudo using `esc` twice
   systemd                       # Provides many useful aliases for systemd
-  #terraform                     # Adds completion for terraform as well as aliases and a promt function
+  terraform                     # Adds completion for terraform as well as aliases and a promt function
   zsh-autosuggestions           # Suggests commands as you type based on history and completions
   zsh-syntax-highlighting       # Provides sytanx highlighting
 )

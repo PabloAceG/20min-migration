@@ -37,3 +37,10 @@
     name: okular
     state: present
   become: yes
+
+- name: Install "Libreoffice", stable version
+  pacman:
+    name: libreoffice-still
+    state: present
+  become: yes
+

@@ -136,6 +136,9 @@ Plug 'tpope/vim-surround'
 " GitHub: https://github.com/mg979/vim-visual-multi
 Plug 'mg979/vim-visual-multi'
 
+" GitHub: https://github.com/hashivim/vim-terraform
+Plug 'hashivim/vim-terraform'
+
 " GitHub: https://github.com/ycm-core/YouCompleteMe
 " NOTE: After installation need to trigger compilation manually:
 "       cd ~/.vim/bundle/YouCompleteMe
@@ -146,6 +149,14 @@ call plug#end()
 
 " For plugins to load correctly
 filetype plugin indent on
+
+" Terraform identation
+autocmd FileType terraform 
+    \ set tabstop=2 | 
+    \ set softtabstop=2 | 
+    \ set shiftwidth=2 | 
+    \ set smarttab |
+    \ set expandtab
 
 " ----------------------------------------
 " -------- Plugins Configuration ---------
