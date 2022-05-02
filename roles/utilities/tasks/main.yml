@@ -14,6 +14,12 @@
     state: present
   become: yes
 
+- name: Install calculator
+  pacman:
+    name: qalculate-gtk
+    state: present
+  become: yes
+
 - name: Install "flameshot" to take screenshots
   pacman:
     name: flameshot
@@ -43,4 +49,3 @@
     name: libreoffice-still
     state: present
   become: yes
-
