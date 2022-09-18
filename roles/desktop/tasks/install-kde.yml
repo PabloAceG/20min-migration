@@ -1,4 +1,69 @@
 ---
+- name: Install packages
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - xorg
+    - sddm
+    - plasma
+  become: yes
+
+- name: Enable display server and network
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+    - sddm
+    - NetworkManager
+  become: yes
+
+- name: Change theme
+  replace:
+    path: /usr/lib/sddm/sddm.conf.d/default.conf
+    regexp: ''
+    replace: ''
+  become: yes
+
+- name: Install KDE applications
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - dolphin
+    - dolphin-plugins
+    - k3b
+    - kalarm
+    - kalendar
+    - kdeconnect
+    - kdegraphics-thumbnailers
+    - kdenetwork-filesharing
+    - kdesk-thumbnailers
+    - kdf
+    - kfind
+    - kfloppy
+    - kget
+    - kgpg
+    - khelpcenter
+    - kleopatra
+    - kmag
+    - kmix
+    - kmousetool
+    - knotes
+    - klourpaint
+    - kompare
+    - kontact
+    - krgb
+    - ksystemlog
+    - ktimer
+    - kwalletmanager
+    - okular
+    - partitionmanager
+    - spectacle
+    - svgpart
+    - sweeper
+
 - name: Install dependencies from different providers
   pacman: 
     name: "{{ item }}"
@@ -9,60 +74,48 @@
     - phonon-qt5-gstreamer
   become: yes
 
-- name: Install visual environment
+- name: Install power managing service and integration with power profiles
   pacman:
     name: "{{ item }}"
     state: present
   loop:
-    - wayland
-    - kwin
-    - xorg-xwayland
-    - plasma-desktop
-    - plasma-wayland-session
+    - powerdevil
+    - power-profiles-daemon
   become: yes
 
-- name: Install "egl-wayland" for NVIDIA user
-  pacman:
-    name: egl-wayland
-    state: present
-  tags: nvidia
-  become: yes
-
-- name: Install QT5 and GLFW packages for Wayland API compatibility
+- name: Install applets
   pacman:
     name: "{{ item }}"
     state: present
   loop:
-    - qt5-wayland
-    - glfw-wayland
+    - plasma-pa # audio
+    - plasma-nm # network manager
   become: yes
- 
-- name: Install "xlsclients" to detect windows running through XWayland
+
+- name: Install "pipewire-pulse" to avoid incompatibility between "pipewire" and "pulseaudio"
   pacman:
-    name: xorg-xlsclients
+    name: pipewire-pulse
     state: present
   become: yes
 
-- name: Install "waybar" as status bar
+- name: Uninstall  "pulseaudio" (dependency for "plasma-pa" and substituted by "pipewire-pulse")
   pacman:
-    name: waybar
-    state: present
+    name: pulseaudio
+    state: absent
+    force: yes
   become: yes
 
-- name: Install "wofi" application launcher
+- name: Enable display resolution management and multiple monitors with "kscreen"
   pacman:
-    name: wofi
+    name: kscreen
     state: present
-  become: yes
 
-
-- name: See if Wayland is running
-  shell: "loginctl show-session  $(loginctl | grep {{ ansible_env.USER }} | awk '{print $1}' ) -p Type"
-  register: window_manager
-  changed_when: false
-
-- name: Start Plasma Wayland session
-  command: >-
-    "/bin/bash XDG_SESSION_TYPE=wayland startplasma-wayland"
-  when: window_manager.stdout.find("Wayland") != -1
-  become: yes
+# Esto hace falta para pipewire + wayland para compartir pantalla
+#- name: Install screen sharing WebRTC for KDE
+#  pacman:
+#    name: "{{ item }}"
+#    state: present
+#  loop:
+#    - xdg-desktop-portal
+#    - xdg-desktop-portal-kde
+#  become: yes
