@@ -49,6 +49,7 @@
     repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
     dest: "{{ ansible_env.HOME}}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
 
+# TODO: always returns changes
 - name: Copy ".zshrc" configuration for Zsh, accounting for "OhMyZsh" plugins
   copy:
     src: .zshrc

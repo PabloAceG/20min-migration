@@ -11,8 +11,9 @@
     state: present
   become: yes
 
-- name: Install "jedi" for "Python" completion
-  pip:
-    name: python-jedi
-    state: present
-  become: yes
+# TODO: not working at the moment
+#- name: Install "jedi" for "Python" completion
+#  pip:
+#    name: python-jedi
+#    state: present
+#  become: yes

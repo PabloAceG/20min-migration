@@ -42,19 +42,20 @@
     enabled: yes
   become: yes
 
-- name: Create a WiFi connection
-  community.general.nmcli:
-    type: wifi
-    conn_name: "{{ item.ssid }}"
-    ifname: "{{ ansible_default_ipv4.interface }}"
-    ssid: "{{ item.ssid }}"
-    wifi_sec:
-      key-mgmt: wpa-psk
-      psk: "{{ item.pass }}"
-    autoconnect: true
-    state: present
-  when: wifi is defined
-  loop: "{{ wifi }}"
-  loop_control:
-    label: "{{ item.ssid }}"
-  become: yes
+# TODO: not working at the moment
+#- name: Create a WiFi connection
+#  community.general.nmcli:
+#    type: wifi
+#    conn_name: "{{ item.ssid }}"
+#    ifname: "{{ ansible_default_ipv4.interface }}"
+#    ssid: "{{ item.ssid }}"
+#    wifi_sec:
+#      key-mgmt: wpa-psk
+#      psk: "{{ item.pass }}"
+#    autoconnect: true
+#    state: present
+#  when: wifi is defined
+#  loop: "{{ wifi }}"
+#  loop_control:
+#    label: "{{ item.ssid }}"
+#  become: yes

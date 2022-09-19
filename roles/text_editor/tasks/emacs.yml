@@ -39,13 +39,14 @@
   become: yes
   when: not doom.stat.exists
 
-- name: Install Doom Emacs
-  shell:
-    cmd: "{{ ansible_env.HOME }}/.emacs.d/bin/doom install"
-    stdin:
-      - y
-      - 3
-      - y
-  when: not doom.stat.exists
+# TODO: not working at the moment
+#- name: Install Doom Emacs
+#  shell:
+#    cmd: "{{ ansible_env.HOME }}/.emacs.d/bin/doom install"
+#    stdin:
+#      - y
+#      - 3
+#      - y
+#  when: not doom.stat.exists
 
 # TODO: Copy conf files
