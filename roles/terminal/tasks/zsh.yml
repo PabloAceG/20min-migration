@@ -68,3 +68,15 @@
   copy:
     src: .p10k.zsh
     dest: "{{ ansible_env.HOME }}"
+
+- name: Install "lsd" new generation "ls"
+  pacman:
+    name: lsd
+    state: present
+  become: yes
+
+- name: Uncomment LSD aliases from ".zshrc" configuration file
+  replace:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    regexp: '^#(alias l.*)'
+    replace: '\1'

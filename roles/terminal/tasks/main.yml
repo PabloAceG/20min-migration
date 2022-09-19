@@ -1,17 +1,20 @@
 ---
-- name: Install terminal "Alacritty"
+- name: Install terminals
   pacman:
-    name: alacritty
+    name: "{{ item }}"
     state: present
+  loop:
+    - alacritty # TODO: check how it works in Sway
+    - kitty # preferred by sway
   become: yes
 
-- name: Install "htop" system monitoring
+- name: Install system monitor
   pacman:
     name: htop
     state: present
   become: yes
 
-- name: Install "neofetch" information tool
+- name: Install terminal information tool
   pacman:
     name: neofetch
     state: present
@@ -19,4 +22,8 @@
 
 - include_tasks: zsh.yml
 
-- include_tasks: lsd.yml
+- name: Install font
+  pacman:
+    name: gnu-free-fonts
+    state: present
+  become: yes

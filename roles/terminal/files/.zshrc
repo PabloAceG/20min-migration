@@ -137,11 +137,11 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Custom aliases for lsd, next gen ls
-alias l='lsd -lFh'      # List files as a long list, show suze, type, human readable
-alias la='lsd -a'       # List all files
-alias lla='lsd -la'     # List all files as a long list
-alias lt='lsd --tree'   # List files as a tree structure
-alias lr='lsd -tRFh'    # List files recursively sorted by date, show type, human-readable
+#alias l='lsd -lFh'      # List files as a long list, show suze, type, human readable
+#alias la='lsd -a'       # List all files
+#alias lla='lsd -la'     # List all files as a long list
+#alias lt='lsd --tree'   # List files as a tree structure
+#alias lr='lsd -tRFh'    # List files recursively sorted by date, show type, human-readable
 # Open config files
 alias vimrc='${EDITOR} ~/.vimrc'
 alias zshrc='${EDITOR} ~/.zshrc'
