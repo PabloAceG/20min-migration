@@ -37,7 +37,7 @@ mkfs.ext4 /dev/sdX2
 ### System Encription
 Setup the encryption of the system:
 ```shell
-cryptsetup -cipher aes-xts-plain64 --verify-passphrase --use-random luksFormat /dev/sdX3
+cryptsetup --cipher aes-xts-plain64 --verify-passphrase --use-random luksFormat /dev/sdX3
 cryptsetup luksOpen /dev/sdX3 luks
 ```
 
@@ -59,9 +59,12 @@ mkswap /dev/mapper/vg0-swap
 ### Mount the system
 ```shell
 mount /dev/mapper/vg0-root /mnt # /mnt is the installed system
+
 swapon /dev/mapper/vg0-swap # Not needed but a good thing to test
+
 mkdir /mnt/boot
 mount /dev/sdX2 /mnt/boot
+
 mkdir /mnt/boot/efi
 mount /dev/sdX1 /mnt/boot/efi
 ```
@@ -69,7 +72,7 @@ mount /dev/sdX1 /mnt/boot/efi
 ### Install basic packages
 
 ```shell
-pacstrap /mnt base base-devel linux linux-firmware
+pacstrap /mnt base base-devel git vim lvm2 grub-efi-x86_64 efibootmgr os-prober linux linux-firmware
 ```
 
 ### Install fstab
@@ -121,12 +124,12 @@ mkinitcpio -p linux
 
 ### Setup grub
 ```shell
-grub-install
-# In /etc/default/grub edit the line GRUB_CMDLINE_LINUX to GRUB_CMDLINE_LINUX="cryptdevice=/dev/sdX3:luks:allow-discards" then run:
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-ud=GRUB
+# In /etc/default/grub:
+# -  edit the line GRUB_CMDLINE_LINUX to GRUB_CMDLINE_LINUX="cryptdevice=/dev/sdX3:luks:allow-discards" 
+# - uncomment GRUB_DISABLE_OS_PROBER=false
+# then run:
 grub-mkconfig -o /boot/grub/grub.cfg
-
-# Exit new system and go into the cd shell
-exit
 ```
 
 ### Automatic installation
@@ -135,6 +138,9 @@ Finally, you need to copy this repository and run the playbook
 ```shell
 git clone https://github.com/PabloAceG/20min-migration.git
 ansible-playbook run.yml
+
+# Exit the newly created and configured system
+exit
 ```
 
 ### Reboot
