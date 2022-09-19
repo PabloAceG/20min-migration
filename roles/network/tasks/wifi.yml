@@ -16,12 +16,11 @@
 
 - name: Install network management tools
   pacman:
-    name: "{{ item }}"
+    name:
+      - networkmanager
+      - wireless_tools
+      - wpa_supplicant
     state: present
-  loop:
-    - networkmanager
-    - wireless_tools
-    - wpa_supplicant
   become: yes
 
 - name: Reload daemons just in case some cache file produces error
@@ -55,6 +54,7 @@
     autoconnect: true
     state: present
   when: wifi is defined
+  loop: "{{ wifi }}"
   loop_control:
     label: "{{ item.ssid }}"
   become: yes

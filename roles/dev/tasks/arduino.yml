@@ -1,13 +1,12 @@
 ---
 - name: Install Arduino IDE
   pacman:
-    name: "{{ item }}"
+    name:
+      - arduino
+      - arduino-cli
+      - arduino-docs
+      - arduino-avr-core
     state: present
-  loop:
-    - arduino
-    - arduino-cli
-    - arduino-docs
-    - arduino-avr-core
   become: yes
 
 - name: Add user to uucp group

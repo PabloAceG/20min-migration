@@ -20,11 +20,32 @@
 
 - name: Install screen sharing WebRTC for KDE
   pacman:
-    name: "{{ item }}"
+    name:
+      - wireplumber
+      - xdg-desktop-portal
+      - xdg-desktop-portal-wlr
+      - xdg-desktop-portal-gtk
     state: present
-  loop:
-    - wireplumber
-    - xdg-desktop-portal
-    - xdg-desktop-portal-wlr
-    - xdg-desktop-portal-gtk
   become: yes
+
+- name: Install display manager
+  pacman:
+    name: sddm
+    state: present
+  become: yes
+
+- name: Enable display server
+  systemd:
+    name: sddm
+    state: started
+    enabled: yes
+  become: yes
+
+# TODO: which regex
+- name: Change KDE Plasma theme
+  replace:
+    path: /usr/lib/sddm/sddm.conf.d/default.conf
+    regexp: ''
+    replace: 'breeze'
+  become: yes
+

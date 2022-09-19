@@ -7,11 +7,10 @@
 
 - name: Prepare prerequisite for Doom Emacs
   pacman:
-    name: "{{ item }}"
+    name:
+      - fd
+      - ripgrep
     state: present
-  loop:
-    - fd
-    - ripgrep
   become: yes
 
 - name: Check if Doom Emacs is installed

@@ -1,27 +1,10 @@
 ---
 - name: Install packages
   pacman:
-    name: "{{ item }}"
+    name:
+      - xorg
+      - plasma
     state: present
-  loop:
-    - xorg
-    - sddm
-    - plasma
-  become: yes
-
-- name: Enable display server
-  systemd:
-    name: sddm
-    state: started
-    enabled: yes
-  become: yes
-
-# TODO: which regex
-- name: Change KDE Plasma theme
-  replace:
-    path: /usr/lib/sddm/sddm.conf.d/default.conf
-    regexp: ''
-    replace: 'breeze'
   become: yes
 
 - name: Install handler for audio/video in KDE
@@ -32,55 +15,52 @@
 
 - name: Install applets
   pacman:
-    name: "{{ item }}"
+    name:
+      - plasma-pa # audio
+      - plasma-nm # network manager
     state: present
-  loop:
-    - plasma-pa # audio
-    - plasma-nm # network manager
   become: yes
 
 - name: Install KDE applications
   pacman:
-    name: "{{ item }}"
+    name:
+      - dolphin
+      - dolphin-plugins
+      - k3b
+      - kalarm
+      - kalendar
+      - kdeconnect
+      - kdegraphics-thumbnailers
+      - kdenetwork-filesharing
+      - kdesk-thumbnailers
+      - kdf
+      - kfind
+      - kfloppy
+      - kget
+      - kgpg
+      - khelpcenter
+      - kleopatra
+      - kmag
+      - kmix
+      - kmousetool
+      - knotes
+      - klourpaint
+      - kompare
+      - kontact
+      - krgb
+      - kscreen # display resolution management and multiple monitors
+      - ksystemlog
+      - ktimer
+      - kwalletmanager
     state: present
-  loop:
-    - dolphin
-    - dolphin-plugins
-    - k3b
-    - kalarm
-    - kalendar
-    - kdeconnect
-    - kdegraphics-thumbnailers
-    - kdenetwork-filesharing
-    - kdesk-thumbnailers
-    - kdf
-    - kfind
-    - kfloppy
-    - kget
-    - kgpg
-    - khelpcenter
-    - kleopatra
-    - kmag
-    - kmix
-    - kmousetool
-    - knotes
-    - klourpaint
-    - kompare
-    - kontact
-    - krgb
-    - kscreen # display resolution management and multiple monitors
-    - ksystemlog
-    - ktimer
-    - kwalletmanager
   become: yes
 
 - name: Install power managing service and integration with power profiles
   pacman:
-    name: "{{ item }}"
+    name:
+      - powerdevil
+      - power-profiles-daemon
     state: present
-  loop:
-    - powerdevil
-    - power-profiles-daemon
   become: yes
 
 - name: Install KDE front-end bluetooth manager

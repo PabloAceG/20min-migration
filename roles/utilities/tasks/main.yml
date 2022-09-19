@@ -7,11 +7,10 @@
 
 - name: Install zip
   pacman:
-    name: "{{ item }}"
+    name:
+      - zip
+      - unzip
     state: present
-  loop:
-    - zip
-    - unzip
   become: yes
 
 - name: Install password manager

@@ -1,11 +1,10 @@
 ---
 - name: Install terminals
   pacman:
-    name: "{{ item }}"
+    name:
+      - alacritty # TODO: check how it works in Sway
+      - kitty # preferred by sway
     state: present
-  loop:
-    - alacritty # TODO: check how it works in Sway
-    - kitty # preferred by sway
   become: yes
 
 - name: Install system monitor
