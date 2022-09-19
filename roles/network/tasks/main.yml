@@ -1,7 +1,9 @@
 ---
+- include_tasks: pacman.yml
+
 - include_tasks: wifi.yml
 
-- include_tasks: pacman.yml
+- include_tasks: bluetooth.yml
 
 - include_tasks: vpn.yml
   tags: vpn

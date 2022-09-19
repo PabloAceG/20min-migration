@@ -21,7 +21,7 @@
     state: present
   become: yes
 
-- name: Reload daemons just in case
+- name: Reload daemons just in case some cache files produce errors
   systemd:
     daemon_reload: yes
   become: yes

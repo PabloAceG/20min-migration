@@ -24,7 +24,7 @@
     - wpa_supplicant
   become: yes
 
-- name: Reload daemons just in case
+- name: Reload daemons just in case some cache file produces error
   systemd:
     daemon_reload: yes
   become: yes
@@ -34,7 +34,7 @@
     name: NetworkManager
     state: started
     enabled: yes
-  become: yes
+  become: yes 
 
 - name: Enable support for wireless connections with "wpa_supplicant"
   systemd:
@@ -54,6 +54,7 @@
       psk: "{{ item.pass }}"
     autoconnect: true
     state: present
-  with_items: "{{ wifi }}"
   when: wifi is defined
+  loop_control:
+    label: "{{ item.ssid }}"
   become: yes

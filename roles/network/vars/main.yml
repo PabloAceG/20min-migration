@@ -1,6 +1,4 @@
 ---
 wifi:
-  - ssid: "VIRGIN-telco_242D_5G"
-    pass: "YqCM4WysQ9bPPX"
-  - ssid: "VIRGIN-telco_242D"
-    pass: "YqCM4WysQ9bPPX"
+#  - ssid: ""
+#    pass: ""
