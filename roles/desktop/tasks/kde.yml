@@ -1,5 +1,5 @@
 ---
-- name: Install packages
+- name: Install KDE base packages
   pacman:
     name:
       - xorg
@@ -13,7 +13,7 @@
     state: present
   become: yes
 
-- name: Install applets
+- name: Install KDE applets
   pacman:
     name:
       - plasma-pa # audio
@@ -32,7 +32,7 @@
       - kdeconnect
       - kdegraphics-thumbnailers
       - kdenetwork-filesharing
-      - kdesk-thumbnailers
+      - kdesdk-thumbnailers
       - kdf
       - kfind
       - kfloppy
@@ -44,10 +44,10 @@
       - kmix
       - kmousetool
       - knotes
-      - klourpaint
+      - kolourpaint
       - kompare
       - kontact
-      - krgb
+      - krfb
       - kscreen # display resolution management and multiple monitors
       - ksystemlog
       - ktimer

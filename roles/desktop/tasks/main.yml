@@ -1,21 +1,23 @@
 ---
 - name: Install Sway with Wayland
-  include_tasks: install-sway.yml
+  include_tasks: sway.yml
 
 - name: Install KDE Plasma with Xorg, as fallback
-  include_tasks: install-kde.yml
+  include_tasks: kde.yml
+
+- name: Uninstall conflicting dependencies
+  pacman:
+    name:
+      - pulseaudio
+      - pipewire-media-session
+    state: absent
+    force: yes
+  become: yes
 
 - name: Install "pipewire-pulse" to avoid incompatibility between "pipewire" and "pulseaudio"
   pacman:
     name: pipewire-pulse
     state: present
-  become: yes
-
-- name: Uninstall  "pulseaudio" (dependency for "plasma-pa" and substituted by "pipewire-pulse")
-  pacman:
-    name: pulseaudio
-    state: absent
-    force: yes
   become: yes
 
 - name: Install screen sharing WebRTC for KDE
