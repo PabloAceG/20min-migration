@@ -1,0 +1,29 @@
+---
+- name: Install packages
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - sway
+    - xorg-xwayland
+    - xorg-xlsclients
+    - qt5-wayland
+    - glfw-wayland
+    - gdm
+  become: yes
+
+- name: Install additional software
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - waybar
+    - wofi
+  become: yes
+  
+- name: Enable display server and network
+  systemd:
+    name: gdm
+    state: started
+    enabled: yes
+  become: yes

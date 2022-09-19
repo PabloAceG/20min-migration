@@ -1,6 +1,30 @@
 ---
-- name: Install KDE Plasma
+- name: Install Sway with Wayland
+  include_tasks: install-sway.yml
+
+- name: Install KDE Plasma with Xorg, as fallback
   include_tasks: install-kde.yml
 
-- name: Install Bluetooth functionalities
-  include_tasks: bluetooth.yml
+- name: Install "pipewire-pulse" to avoid incompatibility between "pipewire" and "pulseaudio"
+  pacman:
+    name: pipewire-pulse
+    state: present
+  become: yes
+
+- name: Uninstall  "pulseaudio" (dependency for "plasma-pa" and substituted by "pipewire-pulse")
+  pacman:
+    name: pulseaudio
+    state: absent
+    force: yes
+  become: yes
+
+- name: Install screen sharing WebRTC for KDE
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - wireplumber
+    - xdg-desktop-portal
+    - xdg-desktop-portal-wlr
+    - xdg-desktop-portal-gtk
+  become: yes
