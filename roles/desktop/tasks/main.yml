@@ -42,10 +42,10 @@
   become: yes
 
 # TODO: which regex
-- name: Change KDE Plasma theme
-  replace:
-    path: /usr/lib/sddm/sddm.conf.d/default.conf
-    regexp: ''
-    replace: 'breeze'
-  become: yes
+#- name: Change KDE Plasma theme
+#  replace:
+#    path: /usr/lib/sddm/sddm.conf.d/default.conf
+#    regexp: ''
+#    replace: 'breeze'
+#  become: yes
 

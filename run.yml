@@ -9,17 +9,20 @@
       become: yes
 
   roles:
+    - role: grub
+      tags: grub
+
     - role: network
       tags: network
 
     - role: terminal
       tags: terminal
 
+    - role: desktop
+      tags: desktop
+
     - role: text_editor
       tags: text_editor
-
-    - role: dev
-      tags: dev
 
     - role: browser
       tags: browser
@@ -30,8 +33,5 @@
     - role: communication
       tags: communication
 
-    - role: desktop
-      tags: desktop
-
-    - role: grub
-      tags: grub
+    - role: dev
+      tags: dev
