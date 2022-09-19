@@ -1,4 +1,10 @@
 ---
+- name: Install partition manager
+  pacman:
+    name: partitionmanager
+    state: present
+  become: yes
+
 - name: Install zip
   pacman:
     name: "{{ item }}"
@@ -20,25 +26,25 @@
     state: present
   become: yes
 
-- name: Install "flameshot" to take screenshots
+- name: Install screenshot utility
   pacman:
     name: flameshot
     state: present
   become: yes
 
-- name: Install "Gwenview" image viewer
+- name: Install image viewer
   pacman:
     name: gwenview
     state: present
   become: yes
 
-- name: Install "Gimp" photo editor
+- name: Install photo editor
   pacman:
     name: gimp
     state: present
   become: yes
 
-- name: Install "Okular" PDF reader
+- name: Install PDF reader
   pacman:
     name: okular
     state: present
@@ -47,5 +53,11 @@
 - name: Install "Libreoffice", stable version
   pacman:
     name: libreoffice-still
+    state: present
+  become: yes
+
+- name: Install font
+  pacman:
+    name: gnu-free-fonts
     state: present
   become: yes

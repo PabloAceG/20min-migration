@@ -21,9 +21,3 @@
   become: yes
 
 - include_tasks: zsh.yml
-
-- name: Install font
-  pacman:
-    name: gnu-free-fonts
-    state: present
-  become: yes
