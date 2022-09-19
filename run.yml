@@ -9,6 +9,9 @@
       become: yes
 
   roles:
+    - role: users
+      tags: users
+
     - role: grub
       tags: grub
 

@@ -1,0 +1,9 @@
+---
+- name: Create users
+  user:
+    name: "{{ username }}"
+    shell: /bin/bash
+    create_home: true
+    home: "/home/{{ username }}"
+    groups: "{{ groups }}"
+    append: yes
